@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+.general{
+    width: 70%;
+    height: 70%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(216, 35, 35, 0.1);
+
+}
+
+.button-con {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.log a{
+     width: 200px;
+    text-align: center;
+    border-radius: 30px;
+    text-transform: uppercase;
+    margin: 5px auto;
+    margin-top: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: black;
+}
+
+button {
+    padding: 30px 15px;
+    border-radius: 2000px;
+    border-color: beige;
+    height: 30px;
+    bottom: 3.3rem;
+    position: absolute;
+}
+
+.godabeg{
+    float: right;
+    padding-left: 100px;
+    width: 50px;
+    height: 50px;
+
+}
+.write-main{
+    background-color: beige;
+    width: 400px;
+    min-height: 300px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+}
+button{
+    width: 100px;
+    padding: 0;
+    border-radius: 10;
+}
+.writings{
+    width: 300px;
+    text-transform: capitalize;
+    padding: 20px;
+}
+
+.special{
+    width: 200px;
+    /* height: 0px; */
+    text-align: center;
+    border-radius: 30px;
+    background-color: red;
+    margin: 5px auto;
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+ 
+  .section2 {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    padding: 5px;
+    text-align: center;
+    justify-content: center;
+
+  }
+  .section2 img{
+    width: 300px;
+    height: 300px;
+  }

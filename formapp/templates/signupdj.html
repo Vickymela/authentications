@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Page</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="frm-total">
+    <h1>register</h1>
+    <p>please fill all fields</p>
+    <form action="" method='post'>
+      {% csrf_token %}
+
+     {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'error' %}
+          <center > <h4 style="color:firebrick";>{{message}}</center>
+          {% else %}
+             <center > <h4 style="color:blue";>{{message}}</center>
+         
+        {% endif %}
+      
+      {% endfor %}
+
+     {% endif %}
+
+
+
+        <div>
+        <input type="text" name="firstname" id="username" placeholder="firstname">
+      </div>
+
+      <div>
+        <input type="text" name="lastname" id="username" placeholder="lastname">
+      </div>
+
+      <div>
+        <input type="text" name="username" id="username" placeholder="Username">
+      </div>
+
+      <div>
+        <input type="email" name="email" id="email" placeholder="Email">
+      </div>
+
+      <div>
+        <input type="password" name="password" id="password" placeholder="Password">
+      </div>
+
+      <div>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+      </div>
+
+      <div>
+        <input type="submit" name="submit" class="submit" value="Register">
+      </div>
+
+      <div class="question">
+        <a href="{% url 'login'%}">Already have an account? <span>LOGIN</span> </a>
+      </div>
+      
+    </form>
+  </div>
+  
+</body>
+</html>

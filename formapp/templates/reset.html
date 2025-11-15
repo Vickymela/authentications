@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset Password</title>
+  <link rel="stylesheet" href=" {% static '/css/style.css' %}">
+
+</head>
+<body>
+  <div class="frm-total-reset">
+    <h1>Reset Password/change password</h1>
+    <hr>
+    <form action="" method="post">
+      {% csrf_token %}
+
+      {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'error' %}
+            <center > <h4 style="color:firebrick";>{{message}}</center>
+            {% else %}
+              <center > <h4 style="color:blue";>{{message}}</center>
+          
+          {% endif %}
+        
+        {% endfor %}
+
+     {% endif %}
+
+
+      <div>  
+        <input type="text" name="username" id="username" placeholder="Username">
+      </div>
+
+
+
+      <div>
+        <input type="password" name="password" id="password" placeholder="Password">
+      </div>
+
+      <div>
+        <input type="password" name="new_password" id="password" placeholder="New Password">
+      </div>
+
+      <div>
+        <input type="submit" name="submit" class="submit-reset" value="Reset">
+      </div>
+
+      
+      <span class="question-reset">
+        <a href="{% url "register" %}">Not a member? <span>Signup</span> </a>
+        <a href="{% url "login" %}">Already a member? <span>Login </span> </a>
+      </span>
+    </form>
+  </div>
+  
+</body>
+</html>

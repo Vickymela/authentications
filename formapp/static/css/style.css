@@ -1,0 +1,227 @@
+*{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    
+    }
+    body{
+        background-color: rgb(23, 23, 53);
+    }
+    .frm-total{
+      background-color: rgb(255, 255, 255);
+      width: 30%;
+      margin: 100px auto;
+      height: 30%;
+      border-radius: 15px;
+      padding: 10px;
+ 
+    }
+    .frm-total h1{
+      text-align: center;
+      text-transform: uppercase;
+      color: darkblue;
+      font-size: 20px;
+      padding: 30px;
+      
+    }
+    
+    .frm-total p{
+      text-align: center;
+      text-transform: capitalize;
+    }
+    .frm-total div{
+      padding: 10px;
+    }
+   
+    input{
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-bottom: 1px solid rgb(100, 92, 92);
+    }
+    
+    input:focus{
+      background-color: lightgray;
+      border: none;
+      /* border-bottom: 1px solid rgb(100, 92, 92); */
+    }
+   
+    .submit{
+      background-color: rgb(20, 20, 65);
+      color: white;
+      border-radius: 15px;
+      width: 50%;
+      margin-left: 90px;
+      margin-top: 10px;
+    }
+    
+    
+    .question a{
+      
+      margin-right: 30px;
+      padding-right: 30px;
+      text-decoration: none;
+      text-transform: capitalize;
+      
+
+    }
+    .question a:hover span{
+      text-decoration: underline;
+      color: black;
+
+    }
+    
+    /* LOGIN */
+
+       .frm-total-login{ 
+      background-color: rgb(255, 255, 255);
+      width: 35%;
+      margin: 200px auto;
+      height: 60%;
+      border-radius: 15px;
+      padding: 20px;
+ 
+    }
+    
+    .frm-total-login h1{
+      text-align: center;
+      text-transform: uppercase;
+      color: darkblue;
+      font-size: 20px;
+      padding: 30px;
+      
+    }
+   
+    .frm-total-login div{
+      margin-top: 40px;
+    }
+   
+    /* input{
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-bottom: 1px solid rgb(100, 92, 92);
+    } */
+    input::placeholder{
+      color: rgb(99, 94, 94);
+    }
+    
+    .submit-login{
+      background-color: rgb(20, 20, 65);
+      color: white;
+      border-radius: 15px;
+      text-align: center;
+      width: 80%;
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+    input[text=submit]{
+        text-align: center;
+    }
+    
+    
+    .question-login a{
+       margin:   88px;
+      
+      text-decoration: none;
+
+    }
+    .question-login a:hover span{
+      text-decoration: underline;
+      color: black;
+
+    }
+
+    /* RESET PASSWORD */
+
+     .frm-total-reset{
+      background-color: rgb(255, 255, 255);
+      width: 35%;
+      margin: 100px auto;
+      height: 60%;
+      border-radius: 15px;
+      padding: 20px;
+ 
+    }
+    
+    .frm-total-reset h1{
+      text-align: center;
+      text-transform: uppercase;
+      color: darkblue;
+      font-size: 20px;
+      padding: 30px;
+      
+    }
+   
+    .frm-total-reset div{
+     margin-top: 20px;
+    
+      padding: 10px;
+    }
+   
+
+
+     .submit-reset{
+      background-color: rgb(20, 20, 65);
+      color: white;
+      border-radius: 15px;
+      text-align: center;
+      width: 80%;
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+
+       input{
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-bottom: 1px solid rgb(100, 92, 92);
+    }
+    
+  
+    
+    
+    .question-reset a{
+       margin: 120px;
+      text-decoration: none;
+
+    }
+    .question-reset a:hover span{
+      text-decoration: underline;
+      color: black;
+
+    }
+
+
+@media(max-width: 480px){
+      body{
+        font-size: 14px;
+        width: 100%;
+        
+      }
+       .frm-total-login,
+       .frm-total-reset,
+       .frm-total{ 
+      background-color: rgb(255, 255, 255);
+      width: 85%;
+      margin: 200px auto;
+      height: 60%;
+      border-radius: 15px;
+      padding: 20px;
+ 
+    }
+    .question-login a,
+    .question-reset a{
+      margin:   48px;
+      padding-top: 30px;
+      text-decoration: none;
+
+    }
+    .question-login a:hover ,
+    .question-reset a:hover{
+      text-decoration: underline;
+      color: black;
+
+    }
+
+    }

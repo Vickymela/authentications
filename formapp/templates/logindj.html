@@ -15,6 +15,17 @@
 
       {% csrf_token %}
 
+      
+      {% if messages %}
+        {% for message in messages %}
+          <center>
+            <h4 style="color:{% if message.tags == 'error' %}firebrick{% else %}blue{% endif %};">
+              {{ message }}
+            </h4>
+          </center>
+        {% endfor %}
+      {% endif %}
+
       <div>  
         <input type="text" name="username" id="username" placeholder="Username">
       </div>

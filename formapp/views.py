@@ -8,6 +8,8 @@ from django.core.mail import EmailMessage
 from django.utils import timezone
 from django.urls import reverse
 from .models import *
+from .helpers import *
+import random
 
 
 def Home(request):
@@ -17,14 +19,16 @@ def Home(request):
       return render(request, 'index.html')
 
 def RegisterView(request):
-    
 
     if request.method == "POST":
-        # first_name = request.POST.get('first_name')
-        # last_name = request.POST.get('last_name')
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
+
+        # Basic validation
+        if not username or not email or not password:
+            messages.error(request, "All fields are required")
+            return redirect('register')
 
         user_data_has_error = False
 
@@ -42,28 +46,37 @@ def RegisterView(request):
 
         if user_data_has_error:
             return redirect('register')
-        else:
-            new_user = User.objects.create_user(
-                # first_name=first_name,
-                # last_name=last_name,
-                email=email, 
-                username=username,
-                password=password
-            )
-            messages.success(request, "Account created. Login now")
-            return redirect('login')
+
+        # Create new user
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+
+        messages.success(request, "Account created. Login now!")
+        return redirect('login')
 
     return render(request, 'signupdj.html')
 
+
 def LoginView(request):
+
+    print('login hit')
 
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        user = authenticate(request, username=username, password=password)
+        user = User.objects.filter(username=username).first()
 
-        if user is not None:
+        
+
+        #user = authenticate(request, username=username, password=password)
+
+        
+
+        if user is not None and user.check_password(password):
             login(request, user)
 
             return redirect('home')
@@ -82,93 +95,86 @@ def LogoutView(request):
 
 def ForgotPassword(request):
 
+    print('hit: forgot password')
+    print(request)
+
     if request.method == "POST":
-        email = request.POST.get('email')
+        email = request.POST.get("email")
 
-        try:
-            user = User.objects.get(email=email)
+        # FIX: correct query
+        user = User.objects.filter(email=email).first()
 
-            new_password_reset = PasswordReset(user=user)
-            new_password_reset.save()
+        if not user:
+            messages.error(request, 'User not found')
+            return render(request, "forgotpassword.html")
 
-            password_reset_url = reverse('reset-password', kwargs={'reset_id': new_password_reset.reset_id})
+        code = generate_otp(user)
 
-            full_password_reset_url = f'{request.scheme}://{request.get_host()}{password_reset_url}'
+        if code:
+            email_body = f'Your OTP code is {code}'
 
-            email_body = f'Reset your password using the link below:\n\n\n{full_password_reset_url}'
-        
             email_message = EmailMessage(
-                'Reset your password', # email subject
+                'Reset your password',
                 email_body,
-                settings.EMAIL_HOST_USER, # email sender
-                [email] # email  receiver 
+                settings.EMAIL_HOST_USER,
+                [email]
             )
+            email_message.send()   # SEND EMAIL (You forgot this)
 
-            email_message.fail_silently = True
-            email_message.send()
+            messages.success(request, 'OTP sent successfully')
+            return redirect("verify_otp")
 
-            return redirect('reset-password', reset_id=new_password_reset.reset_id)
+    return render(request, "forgotpassword.html")
 
-        except User.DoesNotExist:
-            messages.error(request, f"No user with email '{email}' found")
-            return redirect('forgot-password')
+def verify_otp(request):
+    print('hit : otp verification')
 
-    return render(request, 'forgotpassword.html')
+    if request.method == "GET":
+        return render(request, 'verify_otp.html')
 
-def PasswordResetSent(request, reset_id):
+    code = request.POST.get('otp')
+    email = request.POST.get('email')
 
-    if PasswordReset.objects.filter(reset_id=reset_id).exists():
-        return render(request, 'password_reset_sent.html')
-    else:
-        # redirect to forgot password page if code does not exist
-        messages.error(request, 'Invalid reset id')
-        return redirect('forgot-password')
+    user = User.objects.filter(email=email).first()
+
+    if not user:
+        messages.error(request, "User not found")
+        return render(request, 'verify_otp.html')
+
+    feedback = Verify_otp(user, code)  # your helper
+
+    if not feedback:  # OTP FAILED
+        messages.error(request, "OTP verification failed")
+        return render(request, 'verify_otp.html')
+
+    # OTP SUCCESS → redirect with user ID
+    return redirect('reset-password', reset_id=user.id)
+
 
 def ResetPassword(request, reset_id):
+    print("hit password reset")
 
+    # Make sure user exists
     try:
-        password_reset_id = PasswordReset.objects.get(reset_id=reset_id)
+        user = User.objects.get(id=reset_id)
+    except User.DoesNotExist:
+        messages.error(request, "User not found")
+        return redirect("forgot-password")
 
-        if request.method == "POST":
-            password = request.POST.get('password')
-            confirm_password = request.POST.get('confirm_password')
+    if request.method == "GET":
+        return render(request, "reset.html", {"reset_id": reset_id})
 
-            passwords_have_error = False
+    if request.method == "POST":
+        newpassword = request.POST.get('new_password')
+        confirmpassword = request.POST.get('confirm_password')
 
-            if password != confirm_password:
-                passwords_have_error = True
-                messages.error(request, 'Passwords do not match')
+        if newpassword != confirmpassword:
+            messages.error(request, "Passwords must match")
+            return redirect('reset-password', reset_id=reset_id)
 
-            if len(password) < 5:
-                passwords_have_error = True
-                messages.error(request, 'Password must be at least 5 characters long')
+       
+        user.set_password(newpassword)
+        user.save()
 
-            expiration_time = password_reset_id.created_when + timezone.timedelta(minutes=10)
-
-            if timezone.now() > expiration_time:
-                passwords_have_error = True
-                messages.error(request, 'Reset link has expired')
-
-                password_reset_id.delete()
-
-            if not passwords_have_error:
-                user = password_reset_id.user
-                user.set_password(password)
-                user.save()
-
-                password_reset_id.delete()
-
-                messages.success(request, 'Password reset. Proceed to login')
-                return redirect('login')
-            else:
-                # redirect back to password reset page and display errors
-                return redirect('reset-password', reset_id=reset_id)
-
-    
-    except PasswordReset.DoesNotExist:
-        
-        # redirect to forgot password page if code does not exist
-        messages.error(request, 'Invalid reset id')
-        return redirect('forgot-password')
-
-    return render(request, 'password_reset_sent.html')
+        messages.success(request, "Password reset successful! You can now login.")
+        return redirect("login")

@@ -5,12 +5,16 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class PasswordReset(models.Model):
+class Otp(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    reset_id = models.UUIDField(default=uuid.uuid4,unique=True,editable=False)
+    code = models.IntegerField()
+    status= models.BooleanField(default=False)
+
     created_when = models.DateTimeField(auto_now_add=True)
 
     def  __str__(self):
         return f"password reset for {self.user.username} at {self.created_when}"
+
+
 
 

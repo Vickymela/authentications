@@ -23,12 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m#f=*qj2%u&d$5ts1y*tqoa!*&wnav-nes7rm9u-^@$@e$d!8b'
+# SECRET_KEY = 'django-insecure-m#f=*qj2%u&d$5ts1y*tqoa!*&wnav-nes7rm9u-^@$@e$d!8b'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 
-ALLOWED_HOSTS = ['https://authentications-8rvn.onrender.com','authentications-8rvn.onrender.com']
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool, default=False)
+
+
 # ALLOWED_HOSTS = []
 
 

@@ -28,8 +28,8 @@ SECRET_KEY = 'django-insecure-m#f=*qj2%u&d$5ts1y*tqoa!*&wnav-nes7rm9u-^@$@e$d!8b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://authentications-8rvn.onrender.com','authentications-8rvn.onrender.com']
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['https://authentications-8rvn.onrender.com','authentications-8rvn.onrender.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -129,9 +129,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_PORT=465
-EMAIL_USE_SSL=True
-EMAIL_HOST_USER="torybube@gmail.com"
-EMAIL_HOST_PASSWORD ="dvqj wozc jzkr rvst"
+# EMAIL_HOST="smtp.gmail.com"
+# EMAIL_PORT=465
+# EMAIL_USE_SSL=True
+# EMAIL_HOST_USER="torybube@gmail.com"
+# EMAIL_HOST_PASSWORD ="dvqj wozc jzkr rvst"
 
+
+
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT", cast=int)
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

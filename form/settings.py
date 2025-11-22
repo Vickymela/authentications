@@ -28,11 +28,7 @@ SECRET_KEY = 'django-insecure-m#f=*qj2%u&d$5ts1y*tqoa!*&wnav-nes7rm9u-^@$@e$d!8b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-# SECRET_KEY = config('SECRET_KEY')
-# DEBUG = config('DEBUG', cast=bool, default=False)
-
-
+ALLOWED_HOSTS = ['https://authentications-8rvn.onrender.com','authentications-8rvn.onrender.com']
 # ALLOWED_HOSTS = []
 
 
@@ -141,7 +137,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
+# EMAIL_HOST = config("EMAIL_HOST")
+# EMAIL_PORT = config("EMAIL_PORT", cast=int)
+# EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
+# EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 

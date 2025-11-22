@@ -10,28 +10,24 @@
     box-shadow: 0 2px 5px rgba(216, 35, 35, 0.1);
 
 }
+.log a{
+    text-decoration: none;
+    color: black;
+    text-transform: capitalize;
+
+}
+ 
 
 .button-con {
     position: relative;
     display: flex;
     justify-content: center;
 }
-.log a{
-     width: 200px;
-    text-align: center;
-    border-radius: 30px;
-    text-transform: uppercase;
-    margin: 5px auto;
-    margin-top: 10px;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: black;
-}
 
 button {
     padding: 30px 15px;
     border-radius: 2000px;
-    border-color: beige;
+    /* border-color: beige; */
     height: 30px;
     bottom: 3.3rem;
     position: absolute;
@@ -39,17 +35,17 @@ button {
 
 .godabeg{
     float: right;
-    padding-left: 100px;
-    width: 50px;
-    height: 50px;
+    padding-left:35%;
+    width: 30%;
+    height: 20%;
 
-}
+} 
 .write-main{
     background-color: beige;
-    width: 400px;
-    min-height: 300px;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    width: 23vw;
+    margin-top: 5rem;
+    min-height: 40vh;
+   
     
 }
 button{
@@ -60,30 +56,84 @@ button{
 .writings{
     width: 300px;
     text-transform: capitalize;
-    padding: 20px;
-}
+    padding: 1rem;
+} 
 
-.special{
+ .confirm-order{
     width: 200px;
-    /* height: 0px; */
     text-align: center;
     border-radius: 30px;
     background-color: red;
-    margin: 5px auto;
+    margin: 5% auto;
     margin-top: 10px;
     padding: 10px 20px;
-}
+} 
  
   .section2 {
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 10px;
-    padding: 5px;
+    grid-gap: 2%;
+    padding: 2%;
+    padding-left: 35%;
     text-align: center;
     justify-content: center;
 
   }
   .section2 img{
-    width: 300px;
-    height: 300px;
+    width: 15rem;
+    height: 15rem;
   }
+
+@media(max-width:480px){
+  
+  .section2 img{
+    width: 90px;
+    height: 90px;
+  }
+  .writings{
+    width: 2%;
+    text-transform: capitalize;
+    padding: 1rem;
+}
+  .writings h4{
+    width: 0.5%;
+    text-transform: capitalize;
+ 
+}
+.write-main{
+    background-color: beige;
+    width: 33vw;
+    margin-top: 5rem;
+    min-height: 40vh;
+   
+    
+}
+ 
+.confirm-order{
+    width: 90%;
+    text-align: center;
+    border-radius: 30%;
+    background-color: red;
+    margin: 5% auto; 
+    margin-top: 10%;
+    padding: 5% 10%;
+} 
+button {
+    padding: 3px 5px;
+    border-radius: 20px;
+    border-color: beige;
+    height: 20px;
+    bottom: 1.3rem;
+    position: absolute;
+    width: 20vw;
+}
+.log a{
+    text-decoration: none;
+    color: black;
+    text-transform: capitalize;
+    padding: 7%;
+
+}
+ 
+
+   }

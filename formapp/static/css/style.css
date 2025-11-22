@@ -186,7 +186,7 @@
       text-decoration: none;
 
     }
-    .question-reset a:hover span{
+    .question-reset a:hover {
       text-decoration: underline;
       color: black;
 
@@ -212,11 +212,14 @@
     }
     .question-login a,
     .question-reset a{
-      margin:   48px;
-      padding-top: 30px;
+      margin:   18%;
+      /* padding-top: 30%; */
+      padding: 0%;
+      text-align: center;
       text-decoration: none;
 
     }
+    
     .question-login a:hover ,
     .question-reset a:hover{
       text-decoration: underline;

@@ -29,6 +29,7 @@ SECRET_KEY = 'django-insecure-m#f=*qj2%u&d$5ts1y*tqoa!*&wnav-nes7rm9u-^@$@e$d!8b
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://authentications-8rvn.onrender.com','authentications-8rvn.onrender.com']
+# ALLOWED_HOSTS = []
 
 
 # Application definition
